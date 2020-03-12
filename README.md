@@ -8,9 +8,9 @@ Both Master and Workers are created from the same base AMI created with Packer.
 
 Only the Master will be accessibled over the Internet on port 80 which Nginx will proxy to Jenkins on port 8080.
 
-Workers will reside in a 2 private subnets and will  have access to the Internet via the NAT gateway so it can install packages during boot time. 
+Workers will reside in 2 private subnets in eu-west-2 region and will  have access to the Internet via the NAT gateway so it can install packages during boot time. 
 
-Master and Workers will have unrestricted access via Security Groups `jenkins-master-worker` and `jenkins-worker-master`.
+Master and Workers will have unrestricted access via Security Groups `jenkins-master-worker` and `jenkins-worker-master`. Access can be tied down by modifying the Security Groups.
 
 You will need to have both Packer and Terraform install on your machine, you can find instruction for both here:
 
@@ -55,13 +55,13 @@ jenkins-worker
 jenkins-worker.pub
 ```
 
-Navigate to the `terraform` directory and run the following command to create the keys, `do not add a passphrase` to the keys as Master must be able to login to Workers automatically:
+Navigate to the `terraform` directory and run the following command to create the keys, `do not add a passphrase` to the keys as Master must be able to login to Workers passwordlessly:
 ```
 ssh-keygen -t rsa -f jenkins-worker
 ssh-keygen -t rsa -f jenkins-master
 ``` 
 
-Now you can initialize Terrafor to download and the providers and plugin:
+Now you can initialize Terraform to download and the providers and plugin:
 
 ```
 terraform init
