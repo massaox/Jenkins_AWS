@@ -10,8 +10,6 @@ Only the Master will be accessible over the Internet on port 80 which Nginx will
 
 Workers will reside in 2 private subnets in eu-west-2 region and will  have access to the Internet via the NAT gateway so it can install packages during the bootstrap phase. 
 
-Master and Workers will have unrestricted access via Security Groups `jenkins-master-worker` and `jenkins-worker-master`. Access can be tied down by modifying the Security Groups.
-
 You will need to have both Packer and Terraform install on your machine, you can find instruction for both here:
 
 ```
