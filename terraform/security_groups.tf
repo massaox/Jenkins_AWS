@@ -50,17 +50,17 @@ resource "aws_security_group" "jenkins-master-worker" {
   name        = "jenkins-master-worker"
   description = "Allow communication between master and workers"
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["10.0.7.0/24", "10.0.8.0/24"]
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.5.0/24", "10.0.6.0/24"]
 
   }
 
   ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["10.0.5.0/24","10.0.6.0/24"]
   }
   tags = {
@@ -73,19 +73,26 @@ resource "aws_security_group" "jenkins-worker-master" {
   name        = "jenkins-worker-master"
   description = "Allow communication between master and workers"
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["10.0.5.0/24", "10.0.6.0/24"]
-
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.7.0/24", "10.0.8.0/24"]
   }
 
   ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["10.0.7.0/24", "10.0.8.0/24"]
   }
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.7.0/24","10.0.8.0/24"]
+  }
+
   tags = {
     Name = "jenkins-worker-master"
   }
