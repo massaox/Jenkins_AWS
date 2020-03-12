@@ -2,13 +2,13 @@
 ## Overview
 
 ![solution.png output](images/solution.png)
-This solution will provide you with a Jenkins Master and three workers which as part of a Auto-Scaling-Group. Workers will automatically register to the Master over SSH and boot time.
+This solution will provide you with a Jenkins Master and three workers which are part of a Auto-Scaling-Group. Workers will automatically register to the Master over SSH and boot time.
 
 Both Master and Workers are created from the same base AMI created with Packer.
 
-Only the Master will be accessibled over the Internet on port 80 which Nginx will proxy to Jenkins on port 8080.
+Only the Master will be accessible over the Internet on port 80 which Nginx will proxy to Jenkins on port 8080.
 
-Workers will reside in 2 private subnets in eu-west-2 region and will  have access to the Internet via the NAT gateway so it can install packages during boot time. 
+Workers will reside in 2 private subnets in eu-west-2 region and will  have access to the Internet via the NAT gateway so it can install packages during the bootstrap phase. 
 
 Master and Workers will have unrestricted access via Security Groups `jenkins-master-worker` and `jenkins-worker-master`. Access can be tied down by modifying the Security Groups.
 
