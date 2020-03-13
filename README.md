@@ -83,3 +83,10 @@ You can also adjust the following variables to your liking since Master and Work
 variable "instance_type" 
 variable "env"
 ```
+
+## Important Points
+
+- The master at the moment does not have High Availability, however its data is persisted in the EBS volume.
+- jenkins URL access is over HTTP.
+- Workers will not persist their data.
+
